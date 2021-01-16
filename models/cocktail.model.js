@@ -12,6 +12,11 @@ let CocktailSchema = new Schema({
     ref: 'User',
     required: true
   },
+  // creatorName: {
+  //   type: String,
+  //   required: true,
+  //   max: 120
+  // },
   cocktailImage: {
     type: String,
     required: true,

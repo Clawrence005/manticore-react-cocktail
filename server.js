@@ -23,12 +23,12 @@ app.use(express.json());
 
 
 const userRouter = require('./routes/userRoutes');
-// const cocktailRouter = require('./routes/cocktailRoutes');
+const cocktailRouter = require('./routes/cocktailRoutes');
 
 
 
 app.use('/api/users', userRouter);
-// app.use('/api/cocktails', cocktailRouter);
+app.use('/api/cocktails', cocktailRouter);
 
 
 

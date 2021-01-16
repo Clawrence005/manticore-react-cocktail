@@ -25,7 +25,8 @@ userRouter.route('/').get(function (req, res) {
 userRouter.post("/", function (req, res) {
   let user = new User({
     userName: req.body.userName,
-    email: req.body.email, userImage: req.body.userImage,
+    email: req.body.email,
+    userImage: req.body.userImage,
     bio: req.body.bio,
   });
   user.save(function (err, users) {
