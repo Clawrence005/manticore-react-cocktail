@@ -23,6 +23,8 @@ let UserSchema = new Schema({
     // default: './path to default image',
     max: 325
   }
-}, { timestamps: true });
+},
+  { timestamps: true }
+);
 
 module.exports = mongoose.model('User', UserSchema)
