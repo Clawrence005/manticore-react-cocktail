@@ -6,7 +6,8 @@ let User = require('../models/user.model');
 //route: /api/cocktails/
 //access: public
 cocktailRouter.route('/').get(function (req, res) {
-  Cocktail.find()
+  Cocktail.
+    find()
     .sort({ createdAt: -1 })
     .then((cocktails) => {
       res.status(200).send(cocktails)
@@ -15,39 +16,41 @@ cocktailRouter.route('/').get(function (req, res) {
     })
 });
 
-//create
-//desc: POST new cocktail
-//route: /api/cocktails/
-//access: public
+// get one
+// desc: GET one by id
+// route: /api/cocktails/ 
+// access: public
+cocktailRouter.route('/:id').get(function (req, res) {
+  let id = req.params.id;
+  Cocktail.findById(id, function (err, data) {
+    if (!data) {
+      res.status(400).json({
+        message: 'no cocktail found with that id'
+      })
+    } else if (err) {
+      res.status(400).send(err)
+    } else {
+      res.status(201).json(data)
+    }
+  })
+});//need to add populate also ad ref back in in model
 
-//db.categories.findOne( { _id: "MongoDB" } ).parent
-
-// Event.find()
-// .populate({
-//   path: 'creator',
-//   populate: { path: 'createdevents' }
-// });
+// create
+// desc: POST new cocktail
+// route: /api/cocktails/
+// access: public
 
 cocktailRouter.post("/", function (req, res) {
-  // finds the ref and puts in user id as 'creatorName'
-  Cocktail.find()
-    .populate({
-      //from user Schema
-      path: 'userName',
-      // to cocktail schema
-      populate: { path: 'creatorName' }
-    });
   let cocktail = new Cocktail({
     cocktailName: req.body.cocktailName,
     creatorName: req.body.creatorName,
     cocktailImage: req.body.cocktailImage,
-    // ingredients: [Schema.Types.Mixed],
     ingredients: req.body.ingredients,
     method: req.body.method,
     garnish: req.body.garnish,
     glass: req.body.glass,
   });
-  cocktail.save(function (err, cocktails) {
+  cocktail.save(function (err, cocktail) {
     if (err) {
       console.log(err)
     }
@@ -57,7 +60,29 @@ cocktailRouter.post("/", function (req, res) {
   })
 });
 
-//update user
+/// update cocktails
+// desc: PUT cocktails
+// route: /api/cocktails
+// access: public
+cocktailRouter.put('/:id', function (req, res) {
+  let dataToUpdate = {
+    cocktailName: req.body.cocktailName,
+    creatorName: req.body.creatorName,
+    cocktailImage: req.body.cocktailImage,
+    ingredients: req.body.ingredients,
+    method: req.body.method,
+    garnish: req.body.garnish,
+    glass: req.body.glass,
+  }
+  Cocktail.findByIdAndUpdate(req.params.id, { $set: dataToUpdate }, (err, dataToUpdate) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      res.status(200).json(dataToUpdate)
+    }
+  })
+})
 
 //delete
 

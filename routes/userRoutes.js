@@ -1,5 +1,6 @@
 var userRouter = require('express').Router();
 let User = require('../models/user.model');
+const cocktailRouter = require('./cocktailRoutes');
 
 
 
@@ -16,6 +17,26 @@ userRouter.route('/').get(function (req, res) {
 
       res.status(500).send(err);
     })
+});
+
+// get one
+// desc: GET one by id
+// route: /api/users/
+//access: public
+userRouter.route('/:id').get(function (req, res) {
+  let id = req.params.id;
+  User.findById(id, function (err, data) {
+
+    if (!data) {
+      res.status(400).json({
+        message: 'no user found with that id'
+      })
+    } else if (err) {
+      res.status(400).send(err)
+    } else {
+      res.status(200).json(data)
+    }
+  })
 });
 
 //create
@@ -39,7 +60,25 @@ userRouter.post("/", function (req, res) {
   })
 });
 
-//update user
+// update user
+// desc: PUT user
+// route: /api/users
+// access: public
+userRouter.put('/:id', function (req, res) {
+  let dataToUpdate = {
+    userName: req.body.userName,
+    email: req.body.email,
+    bio: req.body.bio,
+    userImage: req.body.userImage
+  }
+  //find 
+  User.findByIdAndUpdate(req.params.id, { $set: dataToUpdate }, (err, dataToUpdate) => {
+    if (err, dataToUpdate)
+      if (err) {
+        res.status(500).send(err)
+      } res.status(200).send(dataToUpdate)
+  })
+})
 
 //delete
 

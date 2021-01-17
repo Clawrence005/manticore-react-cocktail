@@ -20,17 +20,12 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 
-
-
 const userRouter = require('./routes/userRoutes');
 const cocktailRouter = require('./routes/cocktailRoutes');
 
 
-
 app.use('/api/users', userRouter);
 app.use('/api/cocktails', cocktailRouter);
-
-
 
 const PORT = process.env.PORT || 5000;
 

@@ -8,14 +8,15 @@ let CocktailSchema = new Schema({
     max: 60
   },
   creatorName: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
+    required: true,
+    max: 120,
     required: true
   },
   // creatorName: {
-  //   type: String,
-  //   required: true,
-  //   max: 120
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: true
   // },
   cocktailImage: {
     type: String,

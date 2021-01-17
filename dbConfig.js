@@ -4,7 +4,11 @@ const MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_P
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+    const conn = await mongoose.connect(MONGO_URI, {
+      useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,
+      //to be able to update CRUD
+      useFindAndModify: false
+    });
     console.log(`MongoDb connected: ${conn.connection.host}`.cyan.underline.bold)
 
   } catch (error) {
@@ -14,5 +18,5 @@ const connectDB = async () => {
   }
 };
 
-console.log(MONGO_URI);
+// console.log(MONGO_URI);
 module.exports = connectDB;
