@@ -84,6 +84,16 @@ cocktailRouter.put('/:id', function (req, res) {
   })
 })
 
-//delete
+//delete cocktail
+// desc: DELETE cocktail
+// route: /api/cocktails
+// access: public
+cocktailRouter.delete('/:id', function (req, res) {
+  Cocktail.findByIdAndDelete(req.params.id, function (err, id) {
+    if (err) {
+      res.status(400).send(err)
+    } res.json(id)
+  })
+})
 
 module.exports = cocktailRouter;

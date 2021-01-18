@@ -80,6 +80,16 @@ userRouter.put('/:id', function (req, res) {
   })
 })
 
-//delete
+//delete user
+// desc: DELETE user
+// route: /api/users
+// access: public
+userRouter.delete('/:id', function (req, res) {
+  User.findByIdAndDelete(req.params.id, function (err, id) {
+    if (err) {
+      res.status(400).send(err)
+    } res.json(id)
+  })
+})
 
 module.exports = userRouter;
