@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
-import { responsiveFontSizes } from '@material-ui/core';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -28,16 +27,16 @@ function App() {
     <div className="App">
       <h1>Manticore</h1>
       <h2>users</h2>
-      {users.map((user) => <div key={user._id}>
-        <div >{user.userName}</div>
+      {users.map((user) => <div className="card" key={user._id}>
+        <div ><strong>{user.userName}</strong></div>
         <div >{user.email}</div>
         <div >{user.bio}</div>
         <div >{user.userImage}</div>
 
       </div>)}
       <h2>cocktails</h2>
-      {cocktails.map((cocktail) => <div key={cocktail._id}>
-        <div>{cocktail.cocktailName}</div>
+      {cocktails.map((cocktail) => <div className="card" key={cocktail._id}>
+        <div ><strong>{cocktail.cocktailName}</strong></div>
         <div >{cocktail.creatorName}</div>
         <div >{cocktail.cocktailImage}</div>
         <div >{cocktail.ingredients}</div>

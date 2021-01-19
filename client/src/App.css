@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.card{
+  display: inline-block;
+  margin: .5rem;
+  border: 3px solid red;
+  background-color: #efefef;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
