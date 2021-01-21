@@ -7,7 +7,8 @@ let User = require('../models/user.model');
 //access: public
 cocktailRouter.route('/').get(function (req, res) {
   Cocktail.
-    find()
+    find({})
+    .populate('creatorName', ['userName'])
     .sort({ createdAt: -1 })
     .then((cocktails) => {
       res.status(200).send(cocktails)

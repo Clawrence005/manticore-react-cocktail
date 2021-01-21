@@ -19,31 +19,14 @@ function App() {
       .get("http://localhost:5000/api/cocktails")
       .then(response => setCocktails(response.data))
       .catch((err) => console.log(err))
-  }, [])
-
-  // const [state, setState] = useState({
-  //   userName: "",
-  //   email: "",
-  //   bio: "",
-  //   userImage: "",
-  // });
+  }, []);
 
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [bio, setBio] = useState('');
   const [userImage, setUserImage] = useState('');
 
-  // const [inputValue, setInputValue] = useState({
-  //   userName: '', bio: '', email: '', userImage: ''
-  // });
-
-  // const [inputUserName, setInputUserName] = useState({});
-
-  // const handlerUserName = event => {
-  //   setInputUserName(event.target.value);
-  // };
-
-  const handleSubmit = (event) => {
+  const handleUserSubmit = (event) => {
     event.preventDefault();
     // alert(`
     // submitting: 
@@ -61,14 +44,38 @@ function App() {
     }
     axios.post('http://localhost:5000/api/users', newUser)
       .then(res => console.log(res.data));
-
   }
+
+  const [cocktailName, setCocktailName] = useState('');
+  const [creatorName, setCreatorName] = useState('');
+  const [cocktailImage, setCocktailImage] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [method, setMethod] = useState('');
+  const [glass, setGlass] = useState('');
+  const [garnish, setGarnish] = useState('');
+
+  const handleCocktailSubmit = (event) => {
+    event.preventDefault();
+
+    const newCocktail = {
+      cocktailName,
+      creatorName,
+      cocktailImage,
+      ingredients,
+      method,
+      glass,
+      garnish,
+    }
+    axios.post('http://localhost:5000/api/cocktails', newCocktail).then(res => console.log(res.data));
+  }
+
   return (
     <div className="App">
       <h1>Manticore</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleUserSubmit}>
         <h2>User Form</h2>
         <br />
+
         <label>Name</label>
         <input
           type="text"
@@ -78,32 +85,104 @@ function App() {
         />
         <br />
 
-        <label>email</label>
+        <label>Email</label>
         <input
           type="text"
           name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
         />
         <br />
 
-        <label>bio</label>
+        <label>Bio</label>
         <input
           type="text"
           name="bio"
           value={bio}
-          onChange={e => setBio(e.target.value)} />
+          onChange={e => setBio(e.target.value)}
+        />
         <br />
 
-        <label>image</label>
+        <label>Image</label>
         <input
           type="text"
           name="userImage"
           value={userImage}
-          onChange={e => setUserImage(e.target.value)} />
+          onChange={e => setUserImage(e.target.value)}
+        />
         <br />
 
         <button type="submit">submit</button>
+      </form>
+
+      <form onSubmit={handleCocktailSubmit}>
+        <h2>Cocktail Form</h2>
+        <br />
+
+        <label>Cocktail Name</label>
+        <input
+          type="text"
+          name="cocktail name"
+          value={cocktailName}
+          onChange={e => setCocktailName(e.target.value)}
+        />
+        <br />
+
+        <label>Creator's Name</label>
+        <input
+          type="text"
+          name="creatorName"
+          value={creatorName}
+          onChange={e => setCreatorName(e.target.value)}
+        />
+        <br />
+
+        <label>Cocktail Image</label>
+        <input
+          type="text"
+          name="cocktail image"
+          value={cocktailImage}
+          onChange={e => setCocktailImage(e.target.value)}
+        />
+        <br />
+
+        <label>Ingredients</label>
+        <input
+          type="text"
+          name="ingredients"
+          value={ingredients}
+          onChange={e => setIngredients(e.target.value)}
+        />
+        <br />
+
+        <label>Method</label>
+        <input
+          type="text"
+          name="method"
+          value={method}
+          onChange={e => setMethod(e.target.value)}
+        />
+        <br />
+
+        <label>Glassware</label>
+        <input
+          type="text"
+          name="glass"
+          value={glass}
+          onChange={e => setGlass(e.target.value)}
+        />
+        <br />
+
+        <label>Garnish</label>
+        <input
+          type="text"
+          name="garnish"
+          value={garnish}
+          onChange={e => setGarnish(e.target.value)}
+        />
+        <br />
+
+        <button type="submit">Submit</button>
       </form>
 
       <h2>users</h2>
