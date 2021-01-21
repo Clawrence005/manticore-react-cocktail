@@ -11,7 +11,7 @@ cocktailRouter.route('/').get(function (req, res) {
     // .populate('creatorName', ['userName'])
     .populate('creatorName', ['userName'])
     .sort({ createdAt: -1 })
-    .exec((cocktails) => {
+    .then((cocktails) => {
       res.status(200).send(cocktails)
     }).catch((err) => {
       res.status(500).send(err);
@@ -52,6 +52,7 @@ cocktailRouter.post("/", function (req, res) {
     garnish: req.body.garnish,
     glass: req.body.glass,
   });
+  console.log(cocktail)
   cocktail.save(function (err, cocktail) {
     if (err) {
       console.log(err)
