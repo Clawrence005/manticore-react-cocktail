@@ -2,9 +2,6 @@ var userRouter = require('express').Router();
 let User = require('../models/user.model');
 const cocktailRouter = require('./cocktailRoutes');
 
-
-
-
 //desc: GET all users
 //route: /api/users/
 //access: public

@@ -129,12 +129,19 @@ function App() {
         <br />
 
         <label>Creator's Name</label>
-        <input
+        {/* dropdown pulls state of populated users of   */}
+        <select
+          value={creatorName}
+          onChange={e => setCreatorName(e.target.value)}
+        >
+          {users.map(user => (<option key={user._id} value={user._id}>{user.userName}</option>))}
+        </select>
+        {/* <input
           type="text"
           name="creatorName"
           value={creatorName}
           onChange={e => setCreatorName(e.target.value)}
-        />
+        />*/}
         <br />
 
         <label>Cocktail Image</label>
@@ -196,13 +203,16 @@ function App() {
       <h2>cocktails</h2>
       {cocktails.map((cocktail) => <div className="card" key={cocktail._id}>
         <div ><strong>{cocktail.cocktailName}</strong></div>
-        <div >{cocktail.creatorName}</div>
+        <div >{cocktail.creatorName.userName}</div>
         <div >{cocktail.cocktailImage}</div>
         <div >{cocktail.ingredients}</div>
         <div >{cocktail.method}</div>
         <div >{cocktail.glass}</div>
         <div >{cocktail.garnish}</div>
       </div>)}
+      {/* {users.map((user) =>
+        <div key={user._id} >{user.userName}</div>
+      )} */}
 
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

@@ -7,17 +7,17 @@ let CocktailSchema = new Schema({
     required: true,
     max: 60
   },
-  creatorName: {
-    type: String,
-    required: true,
-    max: 120,
-    required: true
-  },
   // creatorName: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
+  //   type: String,
+  //   required: true,
+  //   max: 120,
   //   required: true
   // },
+  creatorName: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   cocktailImage: {
     type: String,
     required: true,

@@ -8,9 +8,10 @@ let User = require('../models/user.model');
 cocktailRouter.route('/').get(function (req, res) {
   Cocktail.
     find({})
+    // .populate('creatorName', ['userName'])
     .populate('creatorName', ['userName'])
     .sort({ createdAt: -1 })
-    .then((cocktails) => {
+    .exec((cocktails) => {
       res.status(200).send(cocktails)
     }).catch((err) => {
       res.status(500).send(err);
