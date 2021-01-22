@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
+import CocktailForm from './components/CocktailForm';
 
 function App() {
 
@@ -54,6 +55,8 @@ function App() {
   const [glass, setGlass] = useState('');
   const [garnish, setGarnish] = useState('');
 
+  const glassOptions = [{ name: 'rocks' }, { name: 'collins' }, { name: 'snifter' }, { name: 'flute' }, { name: 'pint glass' }, { name: 'wine glass' }];
+
   const handleCocktailSubmit = (event) => {
     event.preventDefault();
 
@@ -69,7 +72,21 @@ function App() {
     axios.post('http://localhost:5000/api/cocktails', newCocktail).then(res => console.log(res.data));
   }
   console.log(`creatorName ${creatorName}`)
-  return (
+  return (<main>
+    <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <p>
+        Edit <code>src/App.js</code> and save to reload.
+        </p>
+      <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Learn React
+        </a>
+    </header>
     <div className="App">
       <h1>Manticore</h1>
       <form onSubmit={handleUserSubmit}>
@@ -131,8 +148,6 @@ function App() {
         <label>Creator's Name</label>
         {/* dropdown pulls state of populated users of   */}
         <select
-
-
           value={creatorName}
           onChange={e => setCreatorName(e.target.value, console.log(`setCreatorName: ${e.target.value}  creatorName: ${creatorName}`))}
 
@@ -140,12 +155,6 @@ function App() {
           <option disabled value=''></option>
           {users.map(user => (<option key={user._id} value={user._id}>{user.userName}</option>))}
         </select>
-        {/* <input
-          type="text"
-          name="creatorName"
-          value={creatorName}
-          onChange={e => setCreatorName(e.target.value)}
-        />*/}
         <br />
 
         <label>Cocktail Image</label>
@@ -176,12 +185,19 @@ function App() {
         <br />
 
         <label>Glassware</label>
-        <input
+        {/* <input
           type="text"
           name="glass"
           value={glass}
           onChange={e => setGlass(e.target.value)}
-        />
+        /> */}
+
+        <select
+          value={glass}
+          onChange={e => setGlass(e.target.value, console.log(`glass ${glass}`))}>
+          <option disabled value=''></option>
+          {glassOptions.map((glass) => (<option key={glass.name} value={glass.name}>{glass.name}</option>))};
+        </select>
         <br />
 
         <label>Garnish</label>
@@ -214,25 +230,8 @@ function App() {
         <div >{cocktail.glass}</div>
         <div >{cocktail.garnish}</div>
       </div>)}
-      {/* {users.map((user) =>
-        <div key={user._id} >{user.userName}</div>
-      )} */}
-
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
     </div>
+  </main>
   );
 }
 
