@@ -58,7 +58,8 @@ cocktailRouter.post("/", function (req, res) {
       console.log(err)
     }
     else {
-      res.status(200).json(cocktail)
+      res.status(200).json(cocktail),
+        console.log(cocktail)
     }
   })
 });

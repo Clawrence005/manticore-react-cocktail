@@ -68,7 +68,7 @@ function App() {
     }
     axios.post('http://localhost:5000/api/cocktails', newCocktail).then(res => console.log(res.data));
   }
-
+  console.log(`creatorName ${creatorName}`)
   return (
     <div className="App">
       <h1>Manticore</h1>
@@ -131,9 +131,13 @@ function App() {
         <label>Creator's Name</label>
         {/* dropdown pulls state of populated users of   */}
         <select
+
+
           value={creatorName}
-          onChange={e => setCreatorName(e.target.value)}
+          onChange={e => setCreatorName(e.target.value, console.log(`setCreatorName: ${e.target.value}  creatorName: ${creatorName}`))}
+
         >
+          <option disabled value=''></option>
           {users.map(user => (<option key={user._id} value={user._id}>{user.userName}</option>))}
         </select>
         {/* <input

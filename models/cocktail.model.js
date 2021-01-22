@@ -16,7 +16,7 @@ let CocktailSchema = new Schema({
   creatorName: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
   },
   cocktailImage: {
     type: String,
