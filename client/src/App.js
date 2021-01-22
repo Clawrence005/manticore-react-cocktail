@@ -72,6 +72,19 @@ function App() {
     axios.post('http://localhost:5000/api/cocktails', newCocktail).then(res => console.log(res.data));
   }
   console.log(`creatorName ${creatorName}`)
+
+  function handleDeleteCocktail(id) {
+    console.log(id);
+    axios.delete(`http://localhost:5000/api/cocktails/${id}`)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+  }
+
   return (<main>
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
@@ -214,6 +227,7 @@ function App() {
 
       <h2>users</h2>
       {users.map((user) => <div className="card" key={user._id}>
+        {/* <button type="button" onClick={()=>handleDelete(item.id) }>x</button >*/}
         <div ><strong>{user.userName}</strong></div>
         <div >{user.email}</div>
         <div >{user.bio}</div>
@@ -222,6 +236,7 @@ function App() {
       </div>)}
       <h2>cocktails</h2>
       {cocktails.map((cocktail) => <div className="card" key={cocktail._id}>
+        <button className="delete-button" type="button" onClick={() => handleDeleteCocktail(cocktail._id)}>x</button >
         <div ><strong>{cocktail.cocktailName}</strong></div>
         <div >{cocktail.creatorName.userName}</div>
         <div >{cocktail.cocktailImage}</div>
