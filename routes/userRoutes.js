@@ -89,4 +89,38 @@ userRouter.delete('/:id', function (req, res) {
   })
 })
 
+//specialized routes
+
+//Get all cocktails from user
+// desc: GET cocktail
+// route: /api/cocktails
+// access: public
+userRouter.route('/:id/posts').get(function (req, res) {
+  User.find({}, function (err, users) {
+    if (err) throw err;
+    users.forEach(function (user) {
+      const a = user.post;
+      a.forEach(us => allPosts.push(us));
+      console.log(us)
+    })
+  })
+    .sort({ createdAt: -1 })
+    .then((users) => {
+      res.status(200).send(users);
+    }).catch((err) => {
+
+      res.status(500).send(err);
+    })
+});
+
+const allPosts = [];
+
+// Author.find({}, function(err, users) {
+//     if (err) throw err;
+
+//     users.forEach(function(user) {
+//         const a = user.posts;
+//         a.forEach(us => allPosts.push(us));
+//     });
+// });
 module.exports = userRouter;

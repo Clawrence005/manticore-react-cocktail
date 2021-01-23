@@ -73,6 +73,12 @@ function App() {
   }
   console.log(`creatorName ${creatorName}`)
 
+  //   function handleDeleteUserAndCocktails(id) {
+  //     console.log(id);
+  //     axios.get(`http://localhost:5000/api/cocktails/${id}`)
+  // cok
+  //   }
+
   function handleDeleteCocktail(id) {
     console.log(id);
     axios.delete(`http://localhost:5000/api/cocktails/${id}`)
@@ -227,7 +233,7 @@ function App() {
 
       <h2>users</h2>
       {users.map((user) => <div className="card" key={user._id}>
-        {/* <button type="button" onClick={()=>handleDelete(item.id) }>x</button >*/}
+        {/* <button type="button" onClick={() => handleDeleteUserAndCocktails(user.id)}>x</button > */}
         <div ><strong>{user.userName}</strong></div>
         <div >{user.email}</div>
         <div >{user.bio}</div>

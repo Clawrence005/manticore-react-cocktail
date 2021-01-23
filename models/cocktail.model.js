@@ -37,6 +37,7 @@ let CocktailSchema = new Schema({
   },
   glass: {
     type: String,
+    // enum: ['rocks', 'collins', 'snifter', 'flute', 'pint glass', 'wine glass'],
     required: true,
     max: 60,
     default: 'rocks'

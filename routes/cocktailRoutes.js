@@ -27,7 +27,7 @@ cocktailRouter.route('/:id').get(function (req, res) {
   Cocktail.findById(id, function (err, data) {
     if (!data) {
       res.status(400).json({
-        message: 'no cocktail found with that id'
+        message: 'nopeß cocktail found with that id'
       })
     } else if (err) {
       res.status(400).send(err)
@@ -100,4 +100,30 @@ cocktailRouter.delete('/:id', function (req, res) {
   })
 })
 
+// // get all posts from one User
+//desc: GET all posts(cocktails) from one USER
+//route: /api/cocktails/author/:userId
+//access: public
+cocktailRouter.route('/author/:id').get(function (req, res) {
+  let id = req.params.id;
+  Cocktail
+    .find({ 'creatorName': id })
+    .sort({ createdAt: -1 })
+    .exec(function (err, posts) {
+      if (err) {
+        res.status(400).send(err)
+      } else if (posts < 1) {
+        res.status(400).json({ message: 'no posts found related to id' })
+      } else (posts > 0)
+      res.status(200).json(posts),
+        console.log(posts)
+    });
+});
+
+// Story.
+//   find({ author: author._id }).
+//   exec(function (err, stories) {
+//     if (err) return handleError(err);
+//     console.log('The stories are an array: ', posts);
+//   });
 module.exports = cocktailRouter;
