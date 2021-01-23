@@ -27,7 +27,7 @@ cocktailRouter.route('/:id').get(function (req, res) {
   Cocktail.findById(id, function (err, data) {
     if (!data) {
       res.status(400).json({
-        message: 'nopeß cocktail found with that id'
+        message: 'no cocktail found with that id'
       })
     } else if (err) {
       res.status(400).send(err)
@@ -111,11 +111,13 @@ cocktailRouter.route('/author/:id').get(function (req, res) {
     .sort({ createdAt: -1 })
     .exec(function (err, posts) {
       if (err) {
-        res.status(400).send(err)
-      } else if (posts < 1) {
-        res.status(400).json({ message: 'no posts found related to id' })
-      } else (posts > 0)
-      res.status(200).json(posts),
+        return res.status(400).send(err)
+      }
+      else if (posts.length === 0) {
+        // console.log(`posts.length ${posts.length}`),
+        return res.status(200).json({ message: 'no posts found related to id' })
+      } else (posts.length > 0)
+      return res.status(200).json(posts),
         console.log(posts)
     });
 });

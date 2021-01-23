@@ -91,6 +91,14 @@ function App() {
 
   }
 
+  function clickShowsAllUserPosts(id) {
+    console.log(id);
+    axios.get(`http://localhost:5000/api/cocktails/author/${id}`)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+    // cocktails.map
+  }
+
   return (<main>
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
@@ -232,7 +240,10 @@ function App() {
       </form>
 
       <h2>users</h2>
-      {users.map((user) => <div className="card" key={user._id}>
+      {users.map((user) => <div className="card" key={user._id} onClick={
+
+        () => clickShowsAllUserPosts(user._id)
+      }>
         {/* <button type="button" onClick={() => handleDeleteUserAndCocktails(user.id)}>x</button > */}
         <div ><strong>{user.userName}</strong></div>
         <div >{user.email}</div>
@@ -240,6 +251,7 @@ function App() {
         <div >{user.userImage}</div>
 
       </div>)}
+
       <h2>cocktails</h2>
       {cocktails.map((cocktail) => <div className="card" key={cocktail._id}>
         <button className="delete-button" type="button" onClick={() => handleDeleteCocktail(cocktail._id)}>x</button >
